@@ -12,7 +12,7 @@ extension SCNVector3 {
     }
 
     func length() -> Float {
-        return sqrtf(x * x + y * y + z * z)
+        return sqrtf(Float(x * x + y * y + z * z))
     }
 
     func normalized() -> SCNVector3 {
@@ -29,7 +29,7 @@ extension SCNVector3 {
     }
 
     func dot(vector: SCNVector3) -> Float {
-        return x * vector.x + y * vector.y + z * vector.z
+        return Float(x * vector.x + y * vector.y + z * vector.z)
     }
 
     func cross(vector: SCNVector3) -> SCNVector3 {
@@ -38,7 +38,7 @@ extension SCNVector3 {
 }
 
 func SCNVector3Length(vector: SCNVector3) -> Float {
-    return sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+    return sqrtf(Float(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
 }
 
 func SCNVector3Normalize(vector: SCNVector3) -> SCNVector3 {
@@ -70,7 +70,7 @@ func *= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 func * (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x * scalar, vector.y * scalar, vector.z * scalar)
+    return SCNVector3Make(vector.x * CGFloat(scalar), vector.y * CGFloat(scalar), vector.z * CGFloat(scalar))
 }
 
 func *= ( vector: inout SCNVector3, scalar: Float) {
@@ -86,7 +86,7 @@ func /= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 func / (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x / scalar, vector.y / scalar, vector.z / scalar)
+    return SCNVector3Make(vector.x / CGFloat(scalar), vector.y / CGFloat(scalar), vector.z / CGFloat(scalar))
 }
 
 func /= ( vector: inout SCNVector3, scalar: Float) {

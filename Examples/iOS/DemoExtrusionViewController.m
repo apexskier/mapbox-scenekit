@@ -11,7 +11,7 @@
 #import <SceneKit/SceneKit.h>
 
 #import "DemoExtrusionViewController.h"
-#import "Examples-Swift.h"
+#import "IosExamples-Swift.h"
 
 @interface DemoExtrusionViewController () <MGLMapViewDelegate>
 
