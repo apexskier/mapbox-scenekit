@@ -60,7 +60,7 @@ internal class Math {
         let arg = Constants.earthDiameterInKilometers
                     * imageSize
                     * latitudeAdjustment
-                    / (distance * MapboxImageAPI.tileSizeWidth)
+                    / (distance * 256 /* MapboxImageAPI.tileSizeWidth */)
         let zoom = Int(round(log(arg)/log(2)))
         
         return zoom

@@ -1,38 +1,43 @@
 import Foundation
-import UIKit
 import CoreLocation
+#if os(iOS)
 import MapboxMobileEvents
+#elseif os(macOS)
+import Cocoa
+#endif
+
+public enum TileImageFormat: String {
+    /**
+     Image format for tileset fetcher, PNG uncompressed.
+     **/
+    case PNG = "pngraw"
+    
+    /**
+     Image format for tileset fetcher, JPG uncompressed.
+     **/
+    case JPG100 = "jpg"
+    
+    /**
+     Image format for tileset fetcher, JPG at compression 0.9.
+     **/
+    case JPG90 = "jpg90"
+    
+    /**
+     Image format for tileset fetcher, JPG at compression 0.8.
+     **/
+    case JPG80 = "jpg80"
+    
+    /**
+     Image format for tileset fetcher, JPG at compression 0.7.
+     **/
+    case JPG70 = "jpg70"
+}
 
 /**
 `MapboxImageAPI` provides a convenience wrapper for fetching tiles through the Mapbox web APIs.
  **/
 @objc(MBImageAPI)
 public final class MapboxImageAPI: NSObject {
-    /**
-     Image format for tileset fetcher, PNG uncompressed.
-     **/
-    @objc static let TileImageFormatPNG = "pngraw"
-
-    /**
-     Image format for tileset fetcher, JPG uncompressed.
-     **/
-    @objc static let TileImageFormatJPG100 = "jpg"
-
-    /**
-     Image format for tileset fetcher, JPG at compression 0.9.
-     **/
-    @objc static let TileImageFormatJPG90 = "jpg90"
-
-    /**
-     Image format for tileset fetcher, JPG at compression 0.8.
-     **/
-    @objc static let TileImageFormatJPG80 = "jpg80"
-
-    /**
-     Image format for tileset fetcher, JPG at compression 0.7.
-     **/
-    @objc static let TileImageFormatJPG70 = "jpg70"
-
     /**
      In-progress callback typealias as tiles are loaded with the expected total needed and the current process as a percent.
      **/
@@ -41,7 +46,11 @@ public final class MapboxImageAPI: NSObject {
     /**
      Completion typealias for when tile loading is complete and the image is ready.
      **/
+    #if os(iOS)
     public typealias TileLoadCompletion = (_ image: UIImage?, _ error: NSError?) -> Void
+    #elseif os(macOS)
+    public typealias TileLoadCompletion = (_ image: NSImage?, _ error: NSError?) -> Void
+    #endif
 
     fileprivate static let tileSize = CGSize(width: 256, height: 256)
     fileprivate static let styleSize = CGSize(width: 256, height: 256)
@@ -54,7 +63,9 @@ public final class MapboxImageAPI: NSObject {
     private static let queue = DispatchQueue(label: "com.mapbox.scenekit.processing", attributes: [.concurrent])
 
     private let httpAPI: MapboxHTTPAPI
+    #if os(iOS)
     private var eventsManager: MMEEventsManager = MMEEventsManager.shared()
+    #endif
 
     @objc
     public override init() {
@@ -66,11 +77,13 @@ public final class MapboxImageAPI: NSObject {
         }
 
         if let mapboxAccessToken = mapboxAccessToken {
+            #if os(iOS)
             eventsManager.isMetricsEnabledInSimulator = true
             eventsManager.isMetricsEnabledForInUsePermissions = false
             eventsManager.initialize(withAccessToken: mapboxAccessToken, userAgentBase: "mapbox-scenekit-ios", hostSDKVersion: String(describing: Bundle(for: MapboxImageAPI.self).object(forInfoDictionaryKey: "CFBundleShortVersionString")!))
             eventsManager.disableLocationMetrics()
             eventsManager.sendTurnstileEvent()
+            #endif
 
             httpAPI = MapboxHTTPAPI(accessToken: mapboxAccessToken)
         } else {
@@ -100,13 +113,15 @@ public final class MapboxImageAPI: NSObject {
 
      Returns a UUID representing the task managing the fetching and stitching together of the tile images. Used for cancellation if needed.
      **/
-    @objc
-    public func image(forTileset tileset: String,
-                      zoomLevel zoom: Int,
-                      southWestCorner: CLLocation,
-                      northEastCorner: CLLocation,
-                      format: String, progress: TileLoadProgressCallback? = nil,
-                      completion: @escaping TileLoadCompletion) -> UUID {
+    public func image(
+        forTileset tileset: String,
+        zoomLevel zoom: Int,
+        southWestCorner: CLLocation,
+        northEastCorner: CLLocation,
+        format: TileImageFormat,
+        progress: TileLoadProgressCallback? = nil,
+        completion: @escaping TileLoadCompletion
+    ) -> UUID {
 
         let bounding = MapboxImageAPI.tiles(zoom: zoom, southWestCorner: southWestCorner, northEastCorner: northEastCorner, tileSize: MapboxImageAPI.tileSize)
         let imageBuilder = ImageBuilder(xs: bounding.xs.count, ys: bounding.ys.count, tileSize: MapboxImageAPI.tileSize, insets: bounding.insets)
@@ -161,11 +176,17 @@ public final class MapboxImageAPI: NSObject {
             }
 
             //Color data gets messed up if the user expectes a PNG back but doesn't get one
-            if format == MapboxImageAPI.TileImageFormatPNG, let image = imageBuilder.makeImage(), let png = UIImagePNGRepresentation(image), let formattedImage = UIImage(data: png) {
-                DispatchQueue.main.async {
-                    completion(formattedImage, nil)
-                }
-            } else if let image = imageBuilder.makeImage() {
+//            if
+//                format == TileImageFormat.PNG,
+//                let image = imageBuilder.makeImage(),
+//                let png = UIImagePNGRepresentation(UIImage(cgImage: image)),
+//                let formattedImage = UIImage(data: png)
+//            {
+//                DispatchQueue.main.async {
+//                    completion(formattedImage, nil)
+//                }
+//            } else
+            if let image = imageBuilder.makeImage() {
                 DispatchQueue.main.async {
                     completion(image, nil)
                 }
@@ -259,6 +280,7 @@ public final class MapboxImageAPI: NSObject {
 
     //MARK: - Helpers
 
+    #if os(iOS)
     internal static func tiles(zoom: Int, southWestCorner: CLLocation, northEastCorner: CLLocation, tileSize: CGSize) -> (xs: [Int], ys: [Int], insets: UIEdgeInsets) {
         
         let minLat = southWestCorner.coordinate.latitude
@@ -293,4 +315,40 @@ public final class MapboxImageAPI: NSObject {
 
         return ((xs.min()!...xs.max()!).map({ $0 }), (ys.min()!...ys.max()!).map({ $0 }), insets)
     }
+    #elseif os(macOS)
+    internal static func tiles(zoom: Int, southWestCorner: CLLocation, northEastCorner: CLLocation, tileSize: CGSize) -> (xs: [Int], ys: [Int], insets: NSEdgeInsets) {
+        
+        let minLat = southWestCorner.coordinate.latitude
+        let maxLat = northEastCorner.coordinate.latitude
+        let minLon = southWestCorner.coordinate.longitude
+        let maxLon = northEastCorner.coordinate.longitude
+        
+        var xs = [Int]()
+        var ys = [Int]()
+        var insets = NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        for lat in [minLat, maxLat] {
+            for lon in [minLon, maxLon] {
+                let tile = Math.latLng2tile(lat: lat, lon: lon, zoom: zoom, tileSize: tileSize)
+                xs.append(tile.xTile)
+                ys.append(tile.yTile)
+                
+                if lat == minLat {
+                    insets = NSEdgeInsets(top: insets.top, left: insets.left, bottom: tileSize.height - CGFloat(tile.yPos), right: insets.right)
+                }
+                if lat == maxLat {
+                    insets = NSEdgeInsets(top: CGFloat(tile.yPos), left: insets.left, bottom: insets.bottom, right: insets.right)
+                }
+                if lon == minLon {
+                    insets = NSEdgeInsets(top: insets.top, left: CGFloat(tile.xPos), bottom: insets.bottom, right: insets.right)
+                }
+                if lon == maxLon {
+                    insets = NSEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: tileSize.width - CGFloat(tile.xPos))
+                }
+            }
+        }
+        
+        return ((xs.min()!...xs.max()!).map({ $0 }), (ys.min()!...ys.max()!).map({ $0 }), insets)
+    }
+    #endif
 }

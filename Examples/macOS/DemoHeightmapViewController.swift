@@ -6,9 +6,9 @@ import MapboxSceneKit
  Demonstrates how to create a terrain node using the Mapbox Scene Kit SDK and apply a heightmap to it based on terrain height.
  **/
 class DemoHeightmapViewController: NSViewController {
-//    @IBOutlet private weak var stylePicker: UISegmentedControl?
+    @IBOutlet private weak var stylePicker: NSPopUpButton?
     @IBOutlet private weak var sceneView: SCNView?
-//    @IBOutlet private weak var progressView: UIProgressView?
+    @IBOutlet private weak var progressView: NSProgressIndicator?
     private weak var terrainNode: TerrainNode?
     private var progressHandler: ProgressCompositor!
 
@@ -19,7 +19,7 @@ class DemoHeightmapViewController: NSViewController {
 
         //Progress handler is a helper to aggregate progress through the three stages causing user wait: fetching heightmap images, calculating/rendering the heightmap, fetching the texture images
         progressHandler = ProgressCompositor(updater: { [weak self] progress in
-            self?.progressView?.progress = progress
+            self?.progressView?.doubleValue = Double(progress)
             self?.progressView?.isHidden = false
         }, completer: { [weak self] in
             self?.progressView?.isHidden = true
@@ -28,6 +28,8 @@ class DemoHeightmapViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressView?.maxValue = 1.0
 
         guard let sceneView = sceneView else {
             return
@@ -66,7 +68,10 @@ class DemoHeightmapViewController: NSViewController {
             return
         }
 
-        self.progressView?.progress = 0.0
+        self.progressView?.doubleValue = 0.0
+        self.stylePicker?.removeAllItems()
+        self.stylePicker?.addItems(withTitles: styles)
+        self.stylePicker?.selectItem(withTitle: style)
         
         //Time to hit the web API and load Mapbox heightmap data for the terrain node
         //Note, you can also wait to place the node until after this fetch has completed. It doesn't have to be in-scene to fetch.
@@ -98,23 +103,23 @@ class DemoHeightmapViewController: NSViewController {
 
     private func defaultMaterials() -> [SCNMaterial] {
         let groundImage = SCNMaterial()
-        groundImage.diffuse.contents = UIColor.darkGray
+        groundImage.diffuse.contents = NSColor.darkGray
         groundImage.name = "Ground texture"
 
         let sideMaterial = SCNMaterial()
-        sideMaterial.diffuse.contents = UIColor.darkGray
+        sideMaterial.diffuse.contents = NSColor.darkGray
         //TODO: Some kind of bug with the normals for sides where not having them double-sided has them not show up
         sideMaterial.isDoubleSided = true
         sideMaterial.name = "Side"
 
         let bottomMaterial = SCNMaterial()
-        bottomMaterial.diffuse.contents = UIColor.black
+        bottomMaterial.diffuse.contents = NSColor.black
         bottomMaterial.name = "Bottom"
 
         return [sideMaterial, sideMaterial, sideMaterial, sideMaterial, groundImage, bottomMaterial]
     }
 
-    @IBAction func swtichStyle(_ sender: Any?) {
-        applyStyle(styles[stylePicker!.selectedSegmentIndex])
+    @IBAction func switchStyles(_ sender: Any?) {
+        applyStyle(styles[stylePicker!.indexOfSelectedItem])
     }
 }

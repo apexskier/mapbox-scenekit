@@ -2,7 +2,7 @@ import Foundation
 import SceneKit
 
 internal func SCNVector3Length(vector: SCNVector3) -> Float {
-    return sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+    return sqrtf(Float(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
 }
 
 internal func SCNVector3Normalize(vector: SCNVector3) -> SCNVector3 {
@@ -10,7 +10,7 @@ internal func SCNVector3Normalize(vector: SCNVector3) -> SCNVector3 {
 }
 
 internal func + (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+    return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
 }
 
 internal func += ( left: inout SCNVector3, right: SCNVector3) {
@@ -18,7 +18,7 @@ internal func += ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 internal func - (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x - right.x, left.y - right.y, left.z - right.z)
+    return SCNVector3(left.x - right.x, left.y - right.y, left.z - right.z)
 }
 
 internal func -= ( left: inout SCNVector3, right: SCNVector3) {
@@ -26,7 +26,7 @@ internal func -= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 internal func * (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x * right.x, left.y * right.y, left.z * right.z)
+    return SCNVector3(left.x * right.x, left.y * right.y, left.z * right.z)
 }
 
 internal func *= ( left: inout SCNVector3, right: SCNVector3) {
@@ -34,7 +34,7 @@ internal func *= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 internal func * (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x * scalar, vector.y * scalar, vector.z * scalar)
+    return SCNVector3(vector.x * scalar, vector.y * scalar, vector.z * scalar)
 }
 
 internal func *= ( vector: inout SCNVector3, scalar: Float) {
@@ -42,7 +42,7 @@ internal func *= ( vector: inout SCNVector3, scalar: Float) {
 }
 
 internal func / (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.x / right.x, left.y / right.y, left.z / right.z)
+    return SCNVector3(left.x / right.x, left.y / right.y, left.z / right.z)
 }
 
 internal func /= ( left: inout SCNVector3, right: SCNVector3) {
@@ -50,7 +50,7 @@ internal func /= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 internal func / (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x / scalar, vector.y / scalar, vector.z / scalar)
+    return SCNVector3(vector.x / scalar, vector.y / scalar, vector.z / scalar)
 }
 
 internal func /= ( vector: inout SCNVector3, scalar: Float) {
@@ -58,7 +58,7 @@ internal func /= ( vector: inout SCNVector3, scalar: Float) {
 }
 
 internal func SCNVector3CrossProduct(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-    return SCNVector3Make(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
+    return SCNVector3(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
 }
 
 // MARK: VectorFloat
@@ -158,7 +158,7 @@ internal func +(lhs: SCNVector4, rhs: SCNVector4) -> SCNVector4 {
 
 internal extension SCNVector3 {
     func length() -> Float {
-        return sqrtf(x * x + y * y + z * z)
+        return sqrtf(Float(x * x + y * y + z * z))
     }
 }
 

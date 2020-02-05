@@ -130,7 +130,7 @@ extension TerrainNode {
                 
                 //sample the height at this position
                 let newPosition  = SCNVector3(samplePosition.x,
-                                              Float(self.heightForLocalPosition(samplePosition)),
+                                              CGFloat(self.heightForLocalPosition(samplePosition)),
                                               samplePosition.z)
                 
                 //add the new position to the new line.

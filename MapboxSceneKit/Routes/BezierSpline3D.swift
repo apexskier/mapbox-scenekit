@@ -7,7 +7,6 @@
 //
 
 import SceneKit
-import UIKit
 
 internal class BezierSpline3D {
     public let curvePoints: [SCNVector3]
@@ -58,17 +57,5 @@ internal class BezierSpline3D {
         let spineSegmentStartIndex: Int = min(Int(absoluteProgress), curvePoints.count - 2 - pad * 2) // Integer time for the index of the starting curvePoint
         let t = Float(absoluteProgress) - Float(spineSegmentStartIndex) // The time to evaluate the curve at
         return (absoluteProgress, spineSegmentStartIndex, t)
-    }
-}
-
-//temporary extension to use this class for color splines
-internal extension SCNVector3 {
-
-    func toColor() -> UIColor {
-        return UIColor(red: CGFloat(self.x), green: CGFloat(self.y), blue: CGFloat(self.z), alpha: 1.0)
-    }
-
-    func toRadius() -> CGFloat {
-        return CGFloat(self.x)
     }
 }

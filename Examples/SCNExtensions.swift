@@ -70,7 +70,7 @@ func *= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 func * (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x * CGFloat(scalar), vector.y * CGFloat(scalar), vector.z * CGFloat(scalar))
+    return SCNVector3Make(vector.x * scalar, vector.y * scalar, vector.z * scalar)
 }
 
 func *= ( vector: inout SCNVector3, scalar: Float) {
@@ -86,7 +86,7 @@ func /= ( left: inout SCNVector3, right: SCNVector3) {
 }
 
 func / (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-    return SCNVector3Make(vector.x / CGFloat(scalar), vector.y / CGFloat(scalar), vector.z / CGFloat(scalar))
+    return SCNVector3Make(vector.x / scalar, vector.y / scalar, vector.z / scalar)
 }
 
 func /= ( vector: inout SCNVector3, scalar: Float) {

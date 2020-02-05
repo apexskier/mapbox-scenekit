@@ -115,7 +115,7 @@ open class TerrainNode: SCNNode {
     @objc public func heightForLocalPosition(_ position: SCNVector3) -> Double {
         let coords = (x: position.x, z: position.z)
         
-        if let groundLevel = TerrainNode.height(heights: terrainHeights, x: coords.x, z: coords.z, metersPerX: metersPerPixelX, metersPerY: metersPerPixelY) {
+        if let groundLevel = TerrainNode.height(heights: terrainHeights, x: Float(coords.x), z: Float(coords.z), metersPerX: metersPerPixelX, metersPerY: metersPerPixelY) {
             return groundLevel
         } else {
             return 0.0
@@ -225,7 +225,7 @@ open class TerrainNode: SCNNode {
                                             zoomLevel: zoomLevel,
                                             southWestCorner: southWestCorner,
                                             northEastCorner: northEastCorner,
-                                            format: MapboxImageAPI.TileImageFormatPNG,
+                                            format: TileImageFormat.PNG,
                                             progress: progress,
                                             completion: { image, fetchError in
                 TerrainNode.queue.async {
@@ -273,9 +273,12 @@ open class TerrainNode: SCNNode {
 
     //MARK: - Geometry Creation
 
-    private func applyTerrainHeightmap(_ image: UIImage,
-                                       withWallHeight wallHeight: CLLocationDistance? = nil,
-                                       multiplier: Float, enableShadows shadows: Bool) {
+    private func applyTerrainHeightmap(
+        _ image: NSImage,
+        withWallHeight wallHeight: CLLocationDistance? = nil,
+        multiplier: Float,
+        enableShadows shadows: Bool
+    ) {
         guard let pixelData = image.cgImage?.dataProvider?.data, let terrainData = CFDataGetBytePtr(pixelData) else {
             NSLog("Couldn't get CGImage color data for terrain")
             return
@@ -316,7 +319,7 @@ open class TerrainNode: SCNNode {
         if let wallHeight = wallHeight {
             let south = createGeometryForWall(xs: [Int](0..<Int(terrainImageSize.width)),
                                               ys: [Int(terrainImageSize.height) - 1],
-                                              normal: SCNVector3Make(0, 0, -1),
+                                              normal: SCNVector3(0, 0, -1),
                                               maxHeight: Float(maxZ + wallHeight - minZ),
                                               vertexOffset: vertices.count)
             vertices.append(contentsOf: south.vertices)
@@ -326,7 +329,7 @@ open class TerrainNode: SCNNode {
             
             let east = createGeometryForWall(xs: [Int(terrainImageSize.width) - 1],
                                              ys: [Int](0..<Int(terrainImageSize.height)),
-                                             normal: SCNVector3Make(1, 0, 0),
+                                             normal: SCNVector3(1, 0, 0),
                                              maxHeight: Float(maxZ + wallHeight - minZ),
                                              vertexOffset: vertices.count)
             vertices.append(contentsOf: east.vertices)
@@ -336,7 +339,7 @@ open class TerrainNode: SCNNode {
 
             let north = createGeometryForWall(xs: [Int](0..<Int(terrainImageSize.width)),
                                               ys: [0],
-                                              normal: SCNVector3Make(0, 0, -1),
+                                              normal: SCNVector3(0, 0, -1),
                                               maxHeight: Float(maxZ + wallHeight - minZ),
                                               vertexOffset: vertices.count)
             vertices.append(contentsOf: north.vertices)
@@ -346,7 +349,7 @@ open class TerrainNode: SCNNode {
 
             let west = createGeometryForWall(xs: [0],
                                              ys: [Int](0..<Int(terrainImageSize.height)),
-                                             normal: SCNVector3Make(1, 0, 0),
+                                             normal: SCNVector3(1, 0, 0),
                                              maxHeight: Float(maxZ + wallHeight - minZ),
                                              vertexOffset: vertices.count)
             vertices.append(contentsOf: west.vertices)
@@ -416,7 +419,7 @@ open class TerrainNode: SCNNode {
                     continue
                 }
 
-                vertices.append(SCNVector3Make(xz.x, Float(z), xz.z))
+                vertices.append(SCNVector3(xz.x, Float(z), xz.z))
 
                 //texture support
                 uvList.append(vector_float2(Float(Float(x) / Float(terrainImageSize.width)), Float(Float(y) / Float(terrainImageSize.height))))
@@ -458,13 +461,13 @@ open class TerrainNode: SCNNode {
 
         let minXZ = terrainImagePixelsToMeters(imageX: 0, imageY: 0)!
         let maxXZ = terrainImagePixelsToMeters(imageX: Int(terrainImageSize.width) - 1, imageY: Int(terrainImageSize.height) - 1)!
-        vertices.append(SCNVector3Make(minXZ.x, Float(0.0), minXZ.z))
+        vertices.append(SCNVector3(minXZ.x, Float(0.0), minXZ.z))
         uvList.append(vector_float2(Float(0.0), Float(0.0)))
-        vertices.append(SCNVector3Make(maxXZ.x, Float(0.0), minXZ.z))
+        vertices.append(SCNVector3(maxXZ.x, Float(0.0), minXZ.z))
         uvList.append(vector_float2(Float(1.0), Float(0.0)))
-        vertices.append(SCNVector3Make(minXZ.x, Float(0.0), maxXZ.z))
+        vertices.append(SCNVector3(minXZ.x, Float(0.0), maxXZ.z))
         uvList.append(vector_float2(Float(0.0), Float(1.0)))
-        vertices.append(SCNVector3Make(maxXZ.x, Float(0.0), maxXZ.z))
+        vertices.append(SCNVector3(maxXZ.x, Float(0.0), maxXZ.z))
         uvList.append(vector_float2(Float(1.0), Float(1.0)))
 
         let cint: CInt = 0
@@ -505,9 +508,9 @@ open class TerrainNode: SCNNode {
                     continue
                 }
 
-                let vertexBottom = SCNVector3Make(xz.x, 0.0, xz.z)
+                let vertexBottom = SCNVector3(xz.x, 0.0, xz.z)
                 vertices.append(vertexBottom)
-                let vertexTop = SCNVector3Make(xz.x, Float(z), xz.z)
+                let vertexTop = SCNVector3(xz.x, Float(z), xz.z)
                 vertices.append(vertexTop)
 
                 uvList.append(vector_float2(Float(textureX / length), Float(Float(z) / maxHeight) * heightRatio))

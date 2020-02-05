@@ -1,7 +1,6 @@
 import Foundation
-#if os(macOS)
-import Cocoa
-#endif
+#if os(iOS)
+import UIKit
 
 internal final class ImageBuilder {
     private let context: CGContext?
@@ -10,7 +9,7 @@ internal final class ImageBuilder {
     private let imageSize: CGSize
     private let compositingDispatchQueue = DispatchQueue(label: "com.mapbox.SceneKit.compositing", attributes: .concurrent)
 
-    init(xs: Int, ys: Int, tileSize: CGSize, insets: EdgeInsets) {
+    init(xs: Int, ys: Int, tileSize: CGSize, insets: UIEdgeInsets) {
         self.imageSize = CGSize(width: CGFloat(xs) * tileSize.width, height: CGFloat(ys) * tileSize.height)
         let finalSize = CGSize(width: imageSize.width - insets.left - insets.right,
                                height: imageSize.height - insets.top - insets.bottom)
@@ -25,37 +24,18 @@ internal final class ImageBuilder {
         }
     }
 
-    #if os(iOS)
     func addTile(x: Int, y: Int, image: UIImage) {
         compositingDispatchQueue.sync(flags: .barrier) { [weak self] in
             guard let self = self else { return }
 
-            context?.draw(image.cgImage, in: CGRect(origin: CGPoint(x: CGFloat(x) * self.tileSize.width, y: CGFloat(Int(self.imageSize.height / self.tileSize.height) - y - 1) * self.tileSize.height), size: self.tileSize))
+            context?.draw(image.cgImage!, in: CGRect(origin: CGPoint(x: CGFloat(x) * self.tileSize.width, y: CGFloat(Int(self.imageSize.height / self.tileSize.height) - y - 1) * self.tileSize.height), size: self.tileSize))
         }
     }
 
     func makeImage() -> UIImage? {
-        if let cgImage = context?.makeImage()?.cropping(to: clippedRect) {
-            return UIImage(cgImage: cgImage)
+        guard let fullImageRef = context?.makeImage(), let croppedImageRef = fullImageRef.cropping(to: clippedRect) else {
+            return nil
         }
-        return nil
+        return UIImage(cgImage: croppedImageRef)
     }
-    #elseif os(macOS)
-    func addTile(x: Int, y: Int, image: NSImage) {
-        compositingDispatchQueue.sync(flags: .barrier) { [weak self] in
-            guard let self = self else { return }
-            
-            var rect = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
-            guard let cgImage = image.cgImage(forProposedRect: &rect, context: nil, hints: nil) else { return }
-            context?.draw(cgImage, in: CGRect(origin: CGPoint(x: CGFloat(x) * self.tileSize.width, y: CGFloat(Int(self.imageSize.height / self.tileSize.height) - y - 1) * self.tileSize.height), size: self.tileSize))
-        }
-    }
-    
-    func makeImage() -> NSImage? {
-        if let cgImage = context?.makeImage()?.cropping(to: clippedRect) {
-            return NSImage(cgImage: cgImage, size: imageSize)
-        }
-        return nil
-    }
-    #endif
 }

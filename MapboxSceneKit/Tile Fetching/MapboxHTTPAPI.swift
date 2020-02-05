@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 import CoreLocation
 
 enum FetchError: Int {
@@ -25,6 +24,13 @@ enum FetchError: Int {
     }
 }
 
+#if os(iOS)
+typealias ImageCompletion = (_ image: UIImage?, _ error: FetchError?) -> Void
+#elseif os(macOS)
+import Cocoa
+typealias ImageCompletion = (_ image: NSImage?, _ error: FetchError?) -> Void
+#endif
+
 internal final class MapboxHTTPAPI {
     private static var operationQueue: OperationQueue = {
         var operationQueue = OperationQueue()
@@ -40,18 +46,38 @@ internal final class MapboxHTTPAPI {
         accessToken = token
     }
 
-    func tileset(_ tileset: String, zoomLevel z: Int, xTile x: Int, yTile y: Int, format: String, completion: @escaping (_ image: UIImage?, _ error: FetchError?) -> Void) -> UUID? {
+    func tileset(
+        _ tileset: String,
+        zoomLevel z: Int,
+        xTile x: Int,
+        yTile y: Int,
+        format: TileImageFormat,
+        completion: @escaping ImageCompletion
+    ) -> UUID? {
         guard let url = URL(string: "https://api.mapbox.com/v4/\(tileset)/\(z)/\(x)/\(y).\(format)?access_token=\(accessToken)") else {
             NSLog("Couldn't get URL for fetch task")
             return nil
         }
 
         let task = HttpRequestOperation(url: url, callback: {  (success, responseCode, data) -> Void in
-            guard success, let data = data, let image = UIImage(data: data) else {
+            guard success, let data = data else {
                 NSLog("Error downloading tile: \(responseCode)")
                 completion(nil, FetchError(code: responseCode))
                 return
             }
+            #if os(iOS)
+            guard let image = UIImage(data: data) else {
+                NSLog("Error downloading tile: \(responseCode)")
+                completion(nil, FetchError(code: responseCode))
+                return
+            }
+            #elseif os(macOS)
+            guard let image = NSImage(data: data) else {
+                NSLog("Error downloading tile: \(responseCode)")
+                completion(nil, FetchError(code: responseCode))
+                return
+            }
+            #endif
             completion(image, nil)
         }, session: URLSession.shared)
         MapboxHTTPAPI.operationQueue.addOperations([task], waitUntilFinished: false)
@@ -59,7 +85,14 @@ internal final class MapboxHTTPAPI {
         return task.taskID
     }
 
-    func style(_ s: String, zoomLevel z: Int, xTile x: Int, yTile y: Int, tileSize: CGSize, completion: @escaping (_ image: UIImage?, _ error: FetchError?) -> Void) -> UUID? {
+    func style(
+        _ s: String,
+        zoomLevel z: Int,
+        xTile x: Int,
+        yTile y: Int,
+        tileSize: CGSize,
+        completion: @escaping ImageCompletion
+    ) -> UUID? {
         let boundingBox = Math.tile2BoundingBox(x: x, y: y, z: z)
         let centerLat = boundingBox.latBounds.1 - (boundingBox.latBounds.1 - boundingBox.latBounds.0) / 2.0
         let centerLon = boundingBox.lonBounds.1 - (boundingBox.lonBounds.1 - boundingBox.lonBounds.0) / 2.0
@@ -67,7 +100,14 @@ internal final class MapboxHTTPAPI {
         return style(s, zoomLevel: z, centerLat: centerLat, centerLon: centerLon, tileSize: tileSize, completion: completion)
     }
 
-    func style(_ style: String, zoomLevel z: Int, centerLat: CLLocationDegrees, centerLon: CLLocationDegrees, tileSize: CGSize, completion: @escaping (_ image: UIImage?, _ error: FetchError?) -> Void) -> UUID? {
+    func style(
+        _ style: String,
+        zoomLevel z: Int,
+        centerLat: CLLocationDegrees,
+        centerLon: CLLocationDegrees,
+        tileSize: CGSize,
+        completion: @escaping ImageCompletion
+    ) -> UUID? {
         guard let url = URL(string: "https://api.mapbox.com/styles/v1/\(style)/static/\(centerLon),\(centerLat),\(z)/\(Int(tileSize.width))x\(Int(tileSize.height))?access_token=\(accessToken)&attribution=false&logo=false") else {
             NSLog("Couldn't get URL for fetch task")
             return nil
@@ -75,11 +115,24 @@ internal final class MapboxHTTPAPI {
 
         let headers: [String: String] = ["Accept": "image/*;q=0.8"]
         let task = HttpRequestOperation(url: url, headers: headers, callback: {  (success, responseCode, data) -> Void in
-            guard success, let data = data, let image = UIImage(data: data) else {
+            guard success, let data = data else {
                 NSLog("Error downloading tile: \(responseCode)")
                 completion(nil, FetchError(code: responseCode))
                 return
             }
+            #if os(iOS)
+            guard let image = UIImage(data: data) else {
+                NSLog("Error downloading tile: \(responseCode)")
+                completion(nil, FetchError(code: responseCode))
+                return
+            }
+            #elseif os(macOS)
+            guard let image = NSImage(data: data) else {
+                NSLog("Error downloading tile: \(responseCode)")
+                completion(nil, FetchError(code: responseCode))
+                return
+            }
+            #endif
             completion(image, nil)
         }, session: URLSession.shared)
 
