@@ -1,14 +1,5 @@
-//
-//  SCNProgramExtensions.swift
-//  MapboxSceneKit
-//
-//  Created by Jim Martin on 8/17/18.
-//  Copyright © 2018 MapBox. All rights reserved.
-//
-
 import Foundation
 import SceneKit
-
 
 @available(iOS 10.0, *)
 extension SCNProgram {

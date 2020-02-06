@@ -1,11 +1,3 @@
-//
-//  TerrainNodeExtension+Routes.swift
-//  MapboxSceneKit
-//
-//  Created by Jim Martin on 8/16/18.
-//  Copyright © 2018 MapBox. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import CoreLocation

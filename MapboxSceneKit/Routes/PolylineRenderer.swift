@@ -1,11 +1,3 @@
-//
-//  PolylineRenderer.swift
-//  MapboxSceneKit
-//
-//  Created by Jim Martin on 9/12/18.
-//  Copyright © 2018 MapBox. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import Metal

@@ -1,11 +1,3 @@
-//
-//  PolylineNode.swift
-//  MapboxSceneKit
-//
-//  Created by Jim Martin on 9/11/18.
-//  Copyright © 2018 MapBox. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 

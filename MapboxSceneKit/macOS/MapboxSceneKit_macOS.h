@@ -1,11 +1,3 @@
-//
-//  MapboxSceneKit_macOS.h
-//  MapboxSceneKit macOS
-//
-//  Created by Cameron Little on 2/5/20.
-//  Copyright © 2020 MapBox. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for MapboxSceneKit_macOS.

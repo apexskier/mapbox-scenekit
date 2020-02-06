@@ -65,10 +65,6 @@
 		C568FE9923EB483C0057F96F /* UIEdgeInsetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE9823EB483C0057F96F /* UIEdgeInsetExtensions.swift */; };
 		C568FE9D23EB48510057F96F /* NSEdgeInsetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE9B23EB48510057F96F /* NSEdgeInsetExtensions.swift */; };
 		C568FE9F23EB489E0057F96F /* ColorSpline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE9E23EB489E0057F96F /* ColorSpline.swift */; };
-		C568FEA223EB48E50057F96F /* UIImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA123EB48E50057F96F /* UIImageBuilder.swift */; };
-		C568FEA323EB48E50057F96F /* UIImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA123EB48E50057F96F /* UIImageBuilder.swift */; };
-		C568FEA523EB48EC0057F96F /* NSImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA423EB48EC0057F96F /* NSImageBuilder.swift */; };
-		C568FEA623EB48EC0057F96F /* NSImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA423EB48EC0057F96F /* NSImageBuilder.swift */; };
 		C568FEA823EB49810057F96F /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA723EB49810057F96F /* EdgeInsets.swift */; };
 		C568FEA923EB49810057F96F /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEA723EB49810057F96F /* EdgeInsets.swift */; };
 		C568FEAA23EB4F9E0057F96F /* TerrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A436C720A1F6BC00F42A53 /* TerrainNode.swift */; };
@@ -176,8 +172,6 @@
 		C568FE9823EB483C0057F96F /* UIEdgeInsetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsetExtensions.swift; sourceTree = "<group>"; };
 		C568FE9B23EB48510057F96F /* NSEdgeInsetExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSEdgeInsetExtensions.swift; sourceTree = "<group>"; };
 		C568FE9E23EB489E0057F96F /* ColorSpline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpline.swift; sourceTree = "<group>"; };
-		C568FEA123EB48E50057F96F /* UIImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageBuilder.swift; sourceTree = "<group>"; };
-		C568FEA423EB48EC0057F96F /* NSImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageBuilder.swift; sourceTree = "<group>"; };
 		C568FEA723EB49810057F96F /* EdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsets.swift; sourceTree = "<group>"; };
 		C568FEAB23EB50A10057F96F /* CGExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGExtensions.swift; sourceTree = "<group>"; };
 		C568FEB123EB594A0057F96F /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
@@ -306,8 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				C568FE8E23EB414C0057F96F /* ImageBuilder.swift */,
-				C568FEA123EB48E50057F96F /* UIImageBuilder.swift */,
-				C568FEA423EB48EC0057F96F /* NSImageBuilder.swift */,
 				81A4372220A243B200F42A53 /* MapboxHTTPAPI.swift */,
 				81A4372920A2444B00F42A53 /* HTTPRequestOperation.swift */,
 				81A4372420A243E100F42A53 /* AsyncOperation.swift */,
@@ -668,10 +660,8 @@
 				957C85E92146FF92004C548E /* unlit-line.metal in Sources */,
 				C568FEAA23EB4F9E0057F96F /* TerrainNode.swift in Sources */,
 				959F81622149DE9700A290DF /* PolylineRenderer.swift in Sources */,
-				C568FEA523EB48EC0057F96F /* NSImageBuilder.swift in Sources */,
 				95CC6AA4214ADB05000CD0E6 /* SCNExtensions.swift in Sources */,
 				81A4371720A1FAB700F42A53 /* Math.swift in Sources */,
-				C568FEA223EB48E50057F96F /* UIImageBuilder.swift in Sources */,
 				957C85EC2146FF92004C548E /* TerrainNodeExtension+Routes.swift in Sources */,
 				954A248021484C210050025E /* PolylineCylinder.swift in Sources */,
 				81A4372A20A2444B00F42A53 /* HTTPRequestOperation.swift in Sources */,
@@ -717,7 +707,6 @@
 				C568FE8123EB3F850057F96F /* BezierSpline3D.swift in Sources */,
 				C568FE9023EB41560057F96F /* ImageBuilder.swift in Sources */,
 				C568FE8723EB3F8D0057F96F /* HTTPRequestOperation.swift in Sources */,
-				C568FEA623EB48EC0057F96F /* NSImageBuilder.swift in Sources */,
 				C568FE7B23EB3F810057F96F /* unlit-line.metal in Sources */,
 				C568FEAE23EB515B0057F96F /* TerrainNode.swift in Sources */,
 				C568FE7A23EB3F7C0057F96F /* Math.swift in Sources */,
@@ -726,7 +715,6 @@
 				C568FEA923EB49810057F96F /* EdgeInsets.swift in Sources */,
 				C568FE9D23EB48510057F96F /* NSEdgeInsetExtensions.swift in Sources */,
 				C568FE8823EB3F8D0057F96F /* AsyncOperation.swift in Sources */,
-				C568FEA323EB48E50057F96F /* UIImageBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
