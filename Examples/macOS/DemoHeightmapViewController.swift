@@ -7,6 +7,7 @@ import MapboxSceneKit
  **/
 class DemoHeightmapViewController: NSViewController {
     @IBOutlet private weak var stylePicker: NSPopUpButton?
+    @IBOutlet private weak var debugCheck: NSButton?
     @IBOutlet private weak var sceneView: SCNView?
     @IBOutlet private weak var progressView: NSProgressIndicator?
     private weak var terrainNode: TerrainNode?
@@ -43,8 +44,12 @@ class DemoHeightmapViewController: NSViewController {
         sceneView.showsStatistics = true
 
         //Set up initial terrain and materials
-        let terrainNode = TerrainNode(minLat: 50.044660402821592, maxLat: 50.120873988090956,
-                                      minLon: -122.99017089272466, maxLon: -122.86824490727534)
+        let terrainNode = TerrainNode(
+            minLat: 50.044660402821592,
+            maxLat: 50.120873988090956,
+            minLon: -122.99017089272466,
+            maxLon: -122.86824490727534
+        )
         terrainNode.position = SCNVector3(0, 500, 0)
         terrainNode.geometry?.materials = defaultMaterials()
         scene.rootNode.addChildNode(terrainNode)
@@ -56,6 +61,16 @@ class DemoHeightmapViewController: NSViewController {
         scene.directionalLight.position = SCNVector3Make(terrainNode.boundingBox.max.x, 5000, terrainNode.boundingBox.max.z)
         scene.cameraNode.position = SCNVector3(terrainNode.boundingBox.max.x * 2, 9000, terrainNode.boundingBox.max.z * 2)
         scene.cameraNode.look(at: terrainNode.position)
+        
+        let lockPositionToCamera = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node, matrix) -> SCNVector3 in
+            guard let cameraNode = sceneView.pointOfView else {
+                return node.position
+            }
+            
+            print(cameraNode.position)
+            return cameraNode.convertPosition(SCNVector3(0, 0, -500), to: nil)
+        }
+        scene.debugNode.constraints = [lockPositionToCamera]
 
         applyStyle(styles.first!)
     }
@@ -118,5 +133,17 @@ class DemoHeightmapViewController: NSViewController {
 
     @IBAction func switchStyles(_ sender: Any?) {
         applyStyle(styles[stylePicker!.indexOfSelectedItem])
+    }
+    
+    @IBAction func changeDebugCheck(_ sender: Any?) {
+        guard let scene = sceneView?.scene as? TerrainDemoScene else {
+            return
+        }
+        switch debugCheck!.state {
+        case .on:
+            scene.debugNode.isHidden = false
+        default:
+            scene.debugNode.isHidden = true
+        }
     }
 }

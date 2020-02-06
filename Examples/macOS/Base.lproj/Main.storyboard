@@ -691,6 +691,17 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="0A6D9D2F-4D3E-401B-956C-F898EBC90410" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="m4w-sF-x84">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="4ki-Xw-fsk"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="KLX-B9-kjj"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="F4N-Qe-Qje"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="F4N-Qe-Qje"/>
+                                <toolbarItem reference="4ki-Xw-fsk"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -712,16 +723,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0VQ-Ao-vl4">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
+                                <rect key="frame" x="0.0" y="37" width="480" height="233"/>
                             </sceneView>
-                            <progressIndicator wantsLayer="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7ju-4J-aBp">
-                                <rect key="frame" x="380" y="-1" width="100" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="qW8-gW-uqO"/>
-                                </constraints>
+                            <progressIndicator wantsLayer="YES" maxValue="100" doubleValue="50" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="7ju-4J-aBp">
+                                <rect key="frame" x="456" y="11" width="16" height="16"/>
                             </progressIndicator>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="agV-Rs-Cpj">
-                                <rect key="frame" x="298" y="-3" width="77" height="25"/>
+                                <rect key="frame" x="374" y="5" width="77" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pHQ-33-Pg9" id="jaa-nm-BB1">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -737,19 +745,33 @@
                                     <action selector="switchStyles:" target="XfG-lQ-9wD" id="055-Ec-pPy"/>
                                 </connections>
                             </popUpButton>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cKo-nr-mJ9">
+                                <rect key="frame" x="268" y="10" width="102" height="18"/>
+                                <buttonCell key="cell" type="check" title="Debug Guide" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HTy-C8-U36">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="changeDebugCheck:" target="XfG-lQ-9wD" id="OSh-Wx-znA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7ju-4J-aBp" firstAttribute="leading" secondItem="agV-Rs-Cpj" secondAttribute="trailing" constant="8" id="1an-w5-qKb"/>
-                            <constraint firstItem="0VQ-Ao-vl4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="Ig3-mu-uNc"/>
-                            <constraint firstItem="0VQ-Ao-vl4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="Qg7-fg-AJA"/>
-                            <constraint firstAttribute="bottom" secondItem="agV-Rs-Cpj" secondAttribute="bottom" id="Xkw-0c-xm5"/>
-                            <constraint firstAttribute="bottom" secondItem="7ju-4J-aBp" secondAttribute="bottom" id="bd9-xY-GAT"/>
-                            <constraint firstAttribute="trailing" secondItem="7ju-4J-aBp" secondAttribute="trailing" id="nzP-lO-ddB"/>
-                            <constraint firstAttribute="trailing" secondItem="0VQ-Ao-vl4" secondAttribute="trailing" constant="20" symbolic="YES" id="wL4-Zg-vCk"/>
-                            <constraint firstAttribute="bottom" secondItem="0VQ-Ao-vl4" secondAttribute="bottom" constant="20" symbolic="YES" id="ymg-ZS-6hh"/>
+                            <constraint firstItem="7ju-4J-aBp" firstAttribute="leading" secondItem="agV-Rs-Cpj" secondAttribute="trailing" constant="8" symbolic="YES" id="1an-w5-qKb"/>
+                            <constraint firstItem="agV-Rs-Cpj" firstAttribute="top" secondItem="0VQ-Ao-vl4" secondAttribute="bottom" constant="8" id="2Df-E0-23R"/>
+                            <constraint firstItem="cKo-nr-mJ9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="8" id="5qs-bt-vQY"/>
+                            <constraint firstItem="cKo-nr-mJ9" firstAttribute="centerY" secondItem="agV-Rs-Cpj" secondAttribute="centerY" id="GQT-5d-nhx"/>
+                            <constraint firstItem="0VQ-Ao-vl4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Ig3-mu-uNc"/>
+                            <constraint firstItem="0VQ-Ao-vl4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Qg7-fg-AJA"/>
+                            <constraint firstAttribute="bottom" secondItem="agV-Rs-Cpj" secondAttribute="bottom" constant="8" id="Xkw-0c-xm5"/>
+                            <constraint firstItem="agV-Rs-Cpj" firstAttribute="centerY" secondItem="7ju-4J-aBp" secondAttribute="centerY" id="acV-yc-JmI"/>
+                            <constraint firstItem="agV-Rs-Cpj" firstAttribute="leading" secondItem="cKo-nr-mJ9" secondAttribute="trailing" constant="8" id="kkW-rj-C53"/>
+                            <constraint firstAttribute="trailing" secondItem="7ju-4J-aBp" secondAttribute="trailing" constant="8" id="nzP-lO-ddB"/>
+                            <constraint firstAttribute="trailing" secondItem="0VQ-Ao-vl4" secondAttribute="trailing" id="wL4-Zg-vCk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="debugCheck" destination="cKo-nr-mJ9" id="hrT-Ld-zRb"/>
                         <outlet property="progressView" destination="7ju-4J-aBp" id="RPm-h0-uvA"/>
                         <outlet property="sceneView" destination="0VQ-Ao-vl4" id="arQ-zF-EeP"/>
                         <outlet property="stylePicker" destination="agV-Rs-Cpj" id="tze-vF-oBp"/>
