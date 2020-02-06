@@ -13,7 +13,6 @@
 		81293BF420B4A35C0014A17A /* DemoHeightmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81293BC820B4A1AE0014A17A /* DemoHeightmapViewController.swift */; };
 		81293BF520B4A35C0014A17A /* DemoPlacementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81293BD120B4A1AE0014A17A /* DemoPlacementViewController.swift */; };
 		81293BF720B4A35C0014A17A /* ProgressCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81293BCB20B4A1AE0014A17A /* ProgressCompositor.swift */; };
-		81293BF820B4A35C0014A17A /* TerrainDemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81293BD220B4A1AE0014A17A /* TerrainDemoScene.swift */; };
 		81293BFF20B4B3D20014A17A /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81293BFD20B4B3C10014A17A /* MapboxMobileEvents.framework */; };
 		81293C0120B4B4010014A17A /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81293BFD20B4B3C10014A17A /* MapboxMobileEvents.framework */; };
 		814F3BD520ADF1B40006DDFD /* MapboxImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F3BD420ADF1B40006DDFD /* MapboxImageAPI.swift */; };
@@ -76,6 +75,9 @@
 		C568FEB323EB594A0057F96F /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEB123EB594A0057F96F /* NSImage.swift */; };
 		C568FEB823EC93520057F96F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C568FE3523E8AE550057F96F /* Info.plist */; };
 		C568FEBB23EC97410057F96F /* ColorSpline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE9E23EB489E0057F96F /* ColorSpline.swift */; };
+		C568FEBF23ECA1140057F96F /* SCNCompatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEBC23ECA0F60057F96F /* SCNCompatability.swift */; };
+		C568FEC023ECA1150057F96F /* SCNCompatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEBC23ECA0F60057F96F /* SCNCompatability.swift */; };
+		C568FEC123ECA14B0057F96F /* TerrainDemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE4323E8B3390057F96F /* TerrainDemoScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +130,6 @@
 		81293BCE20B4A1AE0014A17A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81293BD020B4A1AE0014A17A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81293BD120B4A1AE0014A17A /* DemoPlacementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPlacementViewController.swift; sourceTree = "<group>"; };
-		81293BD220B4A1AE0014A17A /* TerrainDemoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainDemoScene.swift; sourceTree = "<group>"; };
 		81293BD320B4A1AE0014A17A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81293BD420B4A1AE0014A17A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81293BD920B4A1C80014A17A /* IosExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +177,7 @@
 		C568FEA723EB49810057F96F /* EdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsets.swift; sourceTree = "<group>"; };
 		C568FEAB23EB50A10057F96F /* CGExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGExtensions.swift; sourceTree = "<group>"; };
 		C568FEB123EB594A0057F96F /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		C568FEBC23ECA0F60057F96F /* SCNCompatability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNCompatability.swift; sourceTree = "<group>"; };
 		F44BB60220C75CBF00CE41C6 /* Examples-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Examples-Bridging-Header.h"; sourceTree = "<group>"; };
 		F44BB60320C75CBF00CE41C6 /* DemoExtrusionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoExtrusionViewController.h; sourceTree = "<group>"; };
 		F44BB60420C75CBF00CE41C6 /* DemoExtrusionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoExtrusionViewController.m; sourceTree = "<group>"; };
@@ -228,7 +230,6 @@
 				817BC08D20BDC071005A015D /* DemoARViewController.swift */,
 				F44BB60320C75CBF00CE41C6 /* DemoExtrusionViewController.h */,
 				F44BB60420C75CBF00CE41C6 /* DemoExtrusionViewController.m */,
-				81293BD220B4A1AE0014A17A /* TerrainDemoScene.swift */,
 				817BC08F20BDC413005A015D /* FocusSquare.swift */,
 				81293BCC20B4A1AE0014A17A /* Assets.xcassets */,
 				81293BCD20B4A1AE0014A17A /* LaunchScreen.storyboard */,
@@ -338,7 +339,6 @@
 				C568FE2C23E8AE550057F96F /* AppDelegate.swift */,
 				C568FE2E23E8AE550057F96F /* ViewController.swift */,
 				C568FE4523E8B3F60057F96F /* DemoHeightmapViewController.swift */,
-				C568FE4323E8B3390057F96F /* TerrainDemoScene.swift */,
 				C568FE3023E8AE550057F96F /* Assets.xcassets */,
 				C568FE3223E8AE550057F96F /* Main.storyboard */,
 				C568FE3523E8AE550057F96F /* Info.plist */,
@@ -353,6 +353,8 @@
 				817BC09120BDC435005A015D /* SCNExtensions.swift */,
 				C568FEAB23EB50A10057F96F /* CGExtensions.swift */,
 				81293BCB20B4A1AE0014A17A /* ProgressCompositor.swift */,
+				C568FEBC23ECA0F60057F96F /* SCNCompatability.swift */,
+				C568FE4323E8B3390057F96F /* TerrainDemoScene.swift */,
 				C568FE2B23E8AE550057F96F /* macOS */,
 				81293BC720B4A1AE0014A17A /* iOS */,
 			);
@@ -642,13 +644,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				81293BF320B4A35C0014A17A /* DemoStyleViewController.swift in Sources */,
-				81293BF820B4A35C0014A17A /* TerrainDemoScene.swift in Sources */,
 				81293BF720B4A35C0014A17A /* ProgressCompositor.swift in Sources */,
 				8190075F20C07FAD002F23C3 /* AppDelegate.swift in Sources */,
 				81293BF420B4A35C0014A17A /* DemoHeightmapViewController.swift in Sources */,
+				C568FEBF23ECA1140057F96F /* SCNCompatability.swift in Sources */,
 				817BC09220BDC435005A015D /* SCNExtensions.swift in Sources */,
 				81293BF520B4A35C0014A17A /* DemoPlacementViewController.swift in Sources */,
 				9569513E2148827800D567AE /* DemoARViewController.swift in Sources */,
+				C568FEC123ECA14B0057F96F /* TerrainDemoScene.swift in Sources */,
 				9569513F2148828200D567AE /* FocusSquare.swift in Sources */,
 				C568FEAC23EB50AC0057F96F /* CGExtensions.swift in Sources */,
 			);
@@ -693,6 +696,7 @@
 				C568FE2D23E8AE550057F96F /* AppDelegate.swift in Sources */,
 				C568FEAD23EB50AC0057F96F /* CGExtensions.swift in Sources */,
 				C568FE4023E8AFF70057F96F /* SCNExtensions.swift in Sources */,
+				C568FEC023ECA1150057F96F /* SCNCompatability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
