@@ -20,9 +20,7 @@ class DemoHeightmapViewController: NSViewController {
         //Progress handler is a helper to aggregate progress through the three stages causing user wait: fetching heightmap images, calculating/rendering the heightmap, fetching the texture images
         progressHandler = ProgressCompositor(updater: { [weak self] progress in
             self?.progressView?.doubleValue = Double(progress)
-        }, completer: { [weak self] in
-            // noop
-        })
+        }, completer: {})
     }
 
     override func viewDidLoad() {

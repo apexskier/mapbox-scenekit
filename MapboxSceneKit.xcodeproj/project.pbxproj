@@ -225,6 +225,7 @@
 		81293BC720B4A1AE0014A17A /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F44BB60220C75CBF00CE41C6 /* Examples-Bridging-Header.h */,
 				81293BD320B4A1AE0014A17A /* AppDelegate.swift */,
 				81293BC920B4A1AE0014A17A /* DemoStyleViewController.swift */,
 				81293BC820B4A1AE0014A17A /* DemoHeightmapViewController.swift */,
@@ -356,7 +357,6 @@
 		C568FE3A23E8AE930057F96F /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				F44BB60220C75CBF00CE41C6 /* Examples-Bridging-Header.h */,
 				817BC09120BDC435005A015D /* SCNExtensions.swift */,
 				C568FEAB23EB50A10057F96F /* CGExtensions.swift */,
 				81293BCB20B4A1AE0014A17A /* ProgressCompositor.swift */,
@@ -795,7 +795,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.scenekit.IosExamples;
 				PRODUCT_NAME = IosExamples;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Examples/Examples-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Examples/iOS/Examples-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -824,7 +824,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.scenekit.IosExamples;
 				PRODUCT_NAME = IosExamples;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "Examples/Examples-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Examples/iOS/Examples-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
