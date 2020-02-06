@@ -206,7 +206,7 @@ open class TerrainNode: SCNNode {
     @available(*, deprecated, message: "DEPRECATED - Please use instead fetchTerrainAndTexture.")
     @objc public func fetchTerrainHeights(minWallHeight: CLLocationDistance = 0.0, multiplier: Float = 1, enableDynamicShadows shadows: Bool = false,
                                           progress: MapboxImageAPI.TileLoadProgressCallback? = nil, completion: @escaping TerrainLoadCompletion) {
-    
+
         fetchTerrainHeights(minWallHeight: minWallHeight,
                             multiplier: multiplier,
                             enableDynamicShadows: shadows,
@@ -245,7 +245,7 @@ open class TerrainNode: SCNNode {
     /// DEPRECATED - Please use instead fetchTerrainAndTexture.
     /// Fetches an image representing a style (either mapbox or user created) to cover this terrain node.
     /// It is up to the caller to apply it as a material component, but this gives the caller the opportunity to modify the image or apply it as something other then default diffuse contents.
-    /// For the simplist usage, you'll want to apply it as the diffuse contents in position 4 (the top): `myRerrainNode.geometry?.materials[4].diffuse.contents = image`.
+    /// For the simplist usage, you'll want to apply it as the diffuse contents in position 4 (the top): `myTerrainNode.geometry?.materials[4].diffuse.contents = image`.
     ///
     /// - Parameters:
     ///   - style: Mapbox style ID for given texture.

@@ -75,6 +75,7 @@
 		C568FEB023EB52400057F96F /* MapboxHTTPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A4372220A243B200F42A53 /* MapboxHTTPAPI.swift */; };
 		C568FEB323EB594A0057F96F /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEB123EB594A0057F96F /* NSImage.swift */; };
 		C568FEB823EC93520057F96F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C568FE3523E8AE550057F96F /* Info.plist */; };
+		C568FEBB23EC97410057F96F /* ColorSpline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FE9E23EB489E0057F96F /* ColorSpline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -702,6 +703,7 @@
 				C568FE7923EB3F780057F96F /* StaticConstants.swift in Sources */,
 				C568FE8323EB3F8D0057F96F /* SCNExtensions.swift in Sources */,
 				C568FE8423EB3F8D0057F96F /* CGExtensions.swift in Sources */,
+				C568FEBB23EC97410057F96F /* ColorSpline.swift in Sources */,
 				C568FEAF23EB516F0057F96F /* MapboxImageAPI.swift in Sources */,
 				C568FEB323EB594A0057F96F /* NSImage.swift in Sources */,
 				C568FE8123EB3F850057F96F /* BezierSpline3D.swift in Sources */,

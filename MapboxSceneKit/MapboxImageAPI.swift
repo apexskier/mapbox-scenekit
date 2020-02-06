@@ -2,11 +2,20 @@ import Foundation
 import CoreLocation
 #if os(iOS)
 import MapboxMobileEvents
+import UIKit
 #elseif os(macOS)
 import Cocoa
 #endif
 
-public enum TileImageFormat: String {
+public enum TileImageFormat: String, LosslessStringConvertible {
+    public var description: String {
+        self.rawValue
+    }
+    
+    public init?(_ description: String) {
+        self.init(rawValue: description)
+    }
+    
     /**
      Image format for tileset fetcher, PNG uncompressed.
      **/
@@ -175,25 +184,30 @@ public final class MapboxImageAPI: NSObject {
                 return
             }
 
+            #if os(iOS)
             //Color data gets messed up if the user expectes a PNG back but doesn't get one
-//            if
-//                format == TileImageFormat.PNG,
-//                let image = imageBuilder.makeImage(),
-//                let png = UIImagePNGRepresentation(UIImage(cgImage: image)),
-//                let formattedImage = UIImage(data: png)
-//            {
-//                DispatchQueue.main.async {
-//                    completion(formattedImage, nil)
-//                }
-//            } else
+            if
+                format == TileImageFormat.PNG,
+                let image = imageBuilder.makeImage(),
+                let png = UIImagePNGRepresentation(image),
+                let formattedImage = UIImage(data: png)
+            {
+                DispatchQueue.main.async {
+                    completion(formattedImage, nil)
+                }
+                return
+            }
+            #endif
+            
             if let image = imageBuilder.makeImage() {
                 DispatchQueue.main.async {
                     completion(image, nil)
                 }
-            } else {
-                DispatchQueue.main.async {
-                    completion(nil, FetchError.unknown.toNSError())
-                }
+                return
+            }
+             
+            DispatchQueue.main.async {
+                completion(nil, FetchError.unknown.toNSError())
             }
         }
 
