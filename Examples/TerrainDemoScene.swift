@@ -59,16 +59,6 @@ final class TerrainDemoScene: SCNScene {
         directionalLight.position = SCNVector3Make(0, 5000, 0)
         background.contents = Color(red: 61.0/255.0, green: 171.0/255.0, blue: 235.0/255.0, alpha: 1.0)
         rootNode.addChildNode(cameraNode)
-        
-        let yMinConstraint = SCNTransformConstraint(inWorldSpace: true, with: { (node, matrix) in
-            var newMatrix = matrix
-            if (node.presentation.position.y < 100.0) {
-                newMatrix.m42 = 100.0
-            }
-            
-            return newMatrix
-        })
-        cameraNode.constraints = [yMinConstraint]
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -62,13 +62,12 @@ class DemoHeightmapViewController: NSViewController {
         scene.cameraNode.position = SCNVector3(terrainNode.boundingBox.max.x * 2, 9000, terrainNode.boundingBox.max.z * 2)
         scene.cameraNode.look(at: terrainNode.position)
         
-        let lockPositionToCamera = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node, matrix) -> SCNVector3 in
+        scene.debugNode.constraints = [SCNTransformConstraint.positionConstraint(inWorldSpace: true, with: { (node, matrix) -> SCNVector3 in
             guard let cameraNode = sceneView.pointOfView else {
                 return node.position
             }
             return cameraNode.convertPosition(SCNVector3(0, 0, -500), to: nil)
-        }
-        scene.debugNode.constraints = [lockPositionToCamera]
+        })]
 
         applyStyle(styles.first!)
     }
