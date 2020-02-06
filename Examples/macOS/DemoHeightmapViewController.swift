@@ -13,7 +13,7 @@ class DemoHeightmapViewController: NSViewController {
     private weak var terrainNode: TerrainNode?
     private var progressHandler: ProgressCompositor!
 
-    private let styles = ["mapbox/outdoors-v10", "mapbox/satellite-v9", "mapbox/navigation-preview-day-v2"]
+    private let styles = ["mapbox/satellite-v9", "mapbox/outdoors-v10", "mapbox/navigation-preview-day-v2"]
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,7 +39,7 @@ class DemoHeightmapViewController: NSViewController {
         //Add the default camera controls for iOS 11
         sceneView.pointOfView = scene.cameraNode
         sceneView.defaultCameraController.pointOfView = sceneView.pointOfView
-        sceneView.defaultCameraController.interactionMode = .orbitTurntable
+        sceneView.defaultCameraController.interactionMode = .fly
         sceneView.defaultCameraController.inertiaEnabled = true
         sceneView.showsStatistics = true
 
@@ -66,8 +66,6 @@ class DemoHeightmapViewController: NSViewController {
             guard let cameraNode = sceneView.pointOfView else {
                 return node.position
             }
-            
-            print(cameraNode.position)
             return cameraNode.convertPosition(SCNVector3(0, 0, -500), to: nil)
         }
         scene.debugNode.constraints = [lockPositionToCamera]
