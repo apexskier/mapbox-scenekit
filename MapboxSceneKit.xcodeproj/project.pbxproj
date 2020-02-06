@@ -78,7 +78,7 @@
 		C568FEAF23EB516F0057F96F /* MapboxImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F3BD420ADF1B40006DDFD /* MapboxImageAPI.swift */; };
 		C568FEB023EB52400057F96F /* MapboxHTTPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A4372220A243B200F42A53 /* MapboxHTTPAPI.swift */; };
 		C568FEB323EB594A0057F96F /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEB123EB594A0057F96F /* NSImage.swift */; };
-		C568FEB623EB5CFE0057F96F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C568FE3523E8AE550057F96F /* Info.plist */; };
+		C568FEB823EC93520057F96F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C568FE3523E8AE550057F96F /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -491,7 +491,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = MapBox;
 				TargetAttributes = {
 					81293BD820B4A1C80014A17A = {
@@ -555,7 +555,7 @@
 			files = (
 				C568FE3123E8AE550057F96F /* Assets.xcassets in Resources */,
 				C568FE3423E8AE550057F96F /* Main.storyboard in Resources */,
-				C568FEB623EB5CFE0057F96F /* Info.plist in Resources */,
+				C568FEB823EC93520057F96F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,7 +954,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1020,6 +1020,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Examples/macOS/MacosExamples.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6D9DLTQJSN;
@@ -1049,6 +1050,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Examples/macOS/MacosExamples.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6D9DLTQJSN;
