@@ -197,6 +197,20 @@ public final class MapboxImageAPI: NSObject {
                 }
                 return
             }
+            #elseif os(macOS)
+            if
+                format == TileImageFormat.PNG,
+                let image = imageBuilder.makeImage(),
+                let tiffData = image.tiffRepresentation,
+                let bitmapRep = NSBitmapImageRep(data: tiffData),
+                let pngData = bitmapRep.representation(using: .png, properties: [:]),
+                let formattedImage = NSImage(data: pngData)
+            {
+                DispatchQueue.main.async {
+                    completion(formattedImage, nil)
+                }
+                return
+            }
             #endif
             
             if let image = imageBuilder.makeImage() {
