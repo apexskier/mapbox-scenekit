@@ -32,9 +32,10 @@ typealias ImageCompletion = (_ image: NSImage?, _ error: FetchError?) -> Void
 #endif
 
 internal final class MapboxHTTPAPI {
+    private static let dispatchQueue: DispatchQueue = DispatchQueue(label: "com.mapbox.scenekit.api", attributes: [.concurrent])
     private static var operationQueue: OperationQueue = {
         var operationQueue = OperationQueue()
-        operationQueue.underlyingQueue = DispatchQueue(label: "com.mapbox.scenekit.api", attributes: [.concurrent])
+        operationQueue.underlyingQueue = MapboxHTTPAPI.dispatchQueue
         operationQueue.name = "Mapbox API Queue"
         operationQueue.maxConcurrentOperationCount = 10
         return operationQueue

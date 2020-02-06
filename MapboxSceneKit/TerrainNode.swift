@@ -229,7 +229,7 @@ open class TerrainNode: SCNNode {
                                             progress: progress,
                                             completion: { image, fetchError in
                 TerrainNode.queue.async {
-                    if let image = image {
+                    if let image = image?.cgImage {
                         self?.applyTerrainHeightmap(image, withWallHeight: minWallHeight, multiplier: multiplier, enableShadows: shadows)
                     }
                     DispatchQueue.main.async() {
@@ -274,12 +274,12 @@ open class TerrainNode: SCNNode {
     //MARK: - Geometry Creation
 
     private func applyTerrainHeightmap(
-        _ image: NSImage,
+        _ image: CGImage,
         withWallHeight wallHeight: CLLocationDistance? = nil,
         multiplier: Float,
         enableShadows shadows: Bool
     ) {
-        guard let pixelData = image.cgImage?.dataProvider?.data, let terrainData = CFDataGetBytePtr(pixelData) else {
+        guard let pixelData = image.dataProvider?.data, let terrainData = CFDataGetBytePtr(pixelData) else {
             NSLog("Couldn't get CGImage color data for terrain")
             return
         }

@@ -29,8 +29,9 @@ internal final class ImageBuilder {
     func addTile(x: Int, y: Int, image: UIImage) {
         compositingDispatchQueue.sync(flags: .barrier) { [weak self] in
             guard let self = self else { return }
+            guard let cgImage = image.cgImage else { return }
 
-            context?.draw(image.cgImage, in: CGRect(origin: CGPoint(x: CGFloat(x) * self.tileSize.width, y: CGFloat(Int(self.imageSize.height / self.tileSize.height) - y - 1) * self.tileSize.height), size: self.tileSize))
+            context?.draw(cgImage, in: CGRect(origin: CGPoint(x: CGFloat(x) * self.tileSize.width, y: CGFloat(Int(self.imageSize.height / self.tileSize.height) - y - 1) * self.tileSize.height), size: self.tileSize))
         }
     }
 

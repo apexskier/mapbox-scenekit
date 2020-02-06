@@ -406,13 +406,13 @@ class FocusSquareSegment: SCNNode {
 
         switch direction {
         case .left:
-            self.position.x -= Float(0.5 / 2 - p.width / 2)
+            self.position.x -= Float(0.5 / 2.0 - p.width / 2)
         case .right:
-            self.position.x += Float(0.5 / 2 - p.width / 2)
+            self.position.x += Float(0.5 / 2.0 - p.width / 2)
         case .up:
-            self.position.y -= Float(0.5 / 2 - p.height / 2)
+            self.position.y -= Float(0.5 / 2.0 - p.height / 2)
         case .down:
-            self.position.y += Float(0.5 / 2 - p.height / 2)
+            self.position.y += Float(0.5 / 2.0 - p.height / 2)
         }
     }
 
@@ -432,13 +432,13 @@ class FocusSquareSegment: SCNNode {
 
         switch direction {
         case .left:
-            self.position.x -= Float(0.5 / 2 - oldLength / 2)
+            self.position.x -= Float(0.5 / 2.0 - oldLength / 2)
         case .right:
-            self.position.x += Float(0.5 / 2 - oldLength / 2)
+            self.position.x += Float(0.5 / 2.0 - oldLength / 2)
         case .up:
-            self.position.y -= Float(0.5 / 2 - oldLength / 2)
+            self.position.y -= Float(0.5 / 2.0 - oldLength / 2)
         case .down:
-            self.position.y += Float(0.5 / 2 - oldLength / 2)
+            self.position.y += Float(0.5 / 2.0 - oldLength / 2)
         }
     }
 }

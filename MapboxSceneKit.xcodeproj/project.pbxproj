@@ -77,7 +77,6 @@
 		C568FEAE23EB515B0057F96F /* TerrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A436C720A1F6BC00F42A53 /* TerrainNode.swift */; };
 		C568FEAF23EB516F0057F96F /* MapboxImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F3BD420ADF1B40006DDFD /* MapboxImageAPI.swift */; };
 		C568FEB023EB52400057F96F /* MapboxHTTPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A4372220A243B200F42A53 /* MapboxHTTPAPI.swift */; };
-		C568FEB223EB594A0057F96F /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEB123EB594A0057F96F /* NSImage.swift */; };
 		C568FEB323EB594A0057F96F /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C568FEB123EB594A0057F96F /* NSImage.swift */; };
 		C568FEB623EB5CFE0057F96F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C568FE3523E8AE550057F96F /* Info.plist */; };
 /* End PBXBuildFile section */
@@ -670,7 +669,6 @@
 				C568FEAA23EB4F9E0057F96F /* TerrainNode.swift in Sources */,
 				959F81622149DE9700A290DF /* PolylineRenderer.swift in Sources */,
 				C568FEA523EB48EC0057F96F /* NSImageBuilder.swift in Sources */,
-				C568FEB223EB594A0057F96F /* NSImage.swift in Sources */,
 				95CC6AA4214ADB05000CD0E6 /* SCNExtensions.swift in Sources */,
 				81A4371720A1FAB700F42A53 /* Math.swift in Sources */,
 				C568FEA223EB48E50057F96F /* UIImageBuilder.swift in Sources */,

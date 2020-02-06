@@ -711,7 +711,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <sceneView translatesAutoresizingMaskIntoConstraints="NO" id="0VQ-Ao-vl4">
+                            <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0VQ-Ao-vl4">
                                 <rect key="frame" x="20" y="20" width="440" height="230"/>
                             </sceneView>
                             <progressIndicator wantsLayer="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7ju-4J-aBp">
